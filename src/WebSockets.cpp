@@ -324,7 +324,7 @@ void WebSockets::headerDone(WSclient_t * client) {
     client->status    = WSC_CONNECTED;
     client->cWsRXsize = 0;
     DEBUG_WEBSOCKETS("[WS][%d][headerDone] Header Handling Done.\n", client->num);
-#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266_ASYNC)
+#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP_ASYNC)
     client->cHttpLine = "";
     handleWebsocket(client);
 #endif
@@ -521,7 +521,7 @@ void WebSockets::handleWebsocketPayloadCb(WSclient_t * client, bool ok, uint8_t 
 
         // reset input
         client->cWsRXsize = 0;
-#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266_ASYNC)
+#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP_ASYNC)
         //register callback for next message
         handleWebsocketWaitFor(client, 2);
 #endif
@@ -589,7 +589,7 @@ String WebSockets::base64_encode(uint8_t * data, size_t length) {
  * @return true if ok
  */
 bool WebSockets::readCb(WSclient_t * client, uint8_t * out, size_t n, WSreadWaitCb cb) {
-#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266_ASYNC)
+#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP_ASYNC)
     if(!client->tcp || !client->tcp->connected()) {
         return false;
     }

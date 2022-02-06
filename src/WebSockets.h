@@ -96,8 +96,8 @@
 
 #define WEBSOCKETS_TCP_TIMEOUT (5000)
 
-#define NETWORK_ESP8266_ASYNC (0)
-#define NETWORK_ESP8266 (1)
+#define NETWORK_ESP_ASYNC (0)
+#define NETWORK_ESP (1)
 #define NETWORK_W5100 (2)
 #define NETWORK_ENC28J60 (3)
 #define NETWORK_ESP32 (4)
@@ -109,8 +109,8 @@
 #if !defined(WEBSOCKETS_NETWORK_TYPE)
 // select Network type based
 #if defined(ESP8266) || defined(ESP31B)
-#define WEBSOCKETS_NETWORK_TYPE NETWORK_ESP8266
-//#define WEBSOCKETS_NETWORK_TYPE NETWORK_ESP8266_ASYNC
+#define WEBSOCKETS_NETWORK_TYPE NETWORK_ESP
+//#define WEBSOCKETS_NETWORK_TYPE NETWORK_ESP_ASYNC
 //#define WEBSOCKETS_NETWORK_TYPE NETWORK_W5100
 
 #elif defined(ESP32)
@@ -123,7 +123,7 @@
 #endif
 
 // Includes and defined based on Network Type
-#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266_ASYNC)
+#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP_ASYNC)
 
 // Note:
 //   No SSL/WSS support for client in Async mode
@@ -148,7 +148,7 @@
 #define WEBSOCKETS_NETWORK_CLASS AsyncTCPbuffer
 #define WEBSOCKETS_NETWORK_SERVER_CLASS AsyncServer
 
-#elif(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266)
+#elif(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP)
 
 #if !defined(ESP8266) && !defined(ESP31B)
 #error "network type ESP8266 only possible on the ESP mcu!"
@@ -319,7 +319,7 @@ typedef struct {
     uint8_t disconnectTimeoutCount = 0;    // after how many subsequent pong timeouts discconnect will happen, 0 means "do not disconnect"
     uint8_t pongTimeoutCount       = 0;    // current pong timeout count
 
-#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266_ASYNC)
+#if(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP_ASYNC)
     String cHttpLine;    ///< HTTP header lines
 #endif
 
