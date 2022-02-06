@@ -141,12 +141,14 @@
 #error "network type ESP8266 ASYNC only possible on the ESP mcu!"
 #endif
 
+#include <AsyncTCP.h>
+#include "../../ESPAsyncTCP/src/ESPAsyncTCPbuffer.h"
 //#include <ESPAsyncTCP.h>
 //#include <ESPAsyncTCPbuffer.h>
-#include <AsyncTCP.h>
 
 #define WEBSOCKETS_NETWORK_CLASS AsyncTCPbuffer
 #define WEBSOCKETS_NETWORK_SERVER_CLASS AsyncServer
+
 
 #elif(WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP)
 
